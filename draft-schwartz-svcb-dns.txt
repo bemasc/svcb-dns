@@ -4,8 +4,8 @@
 
 add                                                          B. Schwartz
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                         2 December 2020
-Expires: 5 June 2021
+Intended status: Standards Track                        17 February 2021
+Expires: 21 August 2021
 
 
                 Service Binding Mapping for DNS Servers
@@ -46,11 +46,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2021.
+   This Internet-Draft will expire on 21 August 2021.
 
 Copyright Notice
 
-   Copyright (c) 2020 IETF Trust and the persons identified as the
+   Copyright (c) 2021 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -83,6 +83,7 @@ Table of Contents
    11. References
      11.1.  Normative References
      11.2.  Informative References
+   Appendix A.  Mapping Summary
    Acknowledgments
    Author's Address
 
@@ -327,12 +328,12 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [SVCB]     Schwartz, B., Bishop, M., and E. Nygren, "Service binding
-              and parameter specification via the DNS (DNS SVCB and
-              HTTPS RRs)", Work in Progress, Internet-Draft, draft-ietf-
-              dnsop-svcb-https-02, 2 November 2020,
-              <http://www.ietf.org/internet-drafts/draft-ietf-dnsop-
-              svcb-https-02.txt>.
+   [SVCB]     Schwartz, B. M., Bishop, M., and E. Nygren, "Service
+              binding and parameter specification via the DNS (DNS SVCB
+              and HTTPS RRs)", Work in Progress, Internet-Draft, draft-
+              ietf-dnsop-svcb-https-02, 2 November 2020,
+              <https://www.ietf.org/archive/id/draft-ietf-dnsop-svcb-
+              https-02.txt>.
 
 11.2.  Informative References
 
@@ -344,6 +345,35 @@ Table of Contents
    [DNSURI]   Josefsson, S., "Domain Name System Uniform Resource
               Identifiers", RFC 4501, DOI 10.17487/RFC4501, May 2006,
               <https://www.rfc-editor.org/info/rfc4501>.
+
+Appendix A.  Mapping Summary
+
+   This table serves as a non-normative summary of the DNS mapping for
+   SVCB.
+
+       +=================+========================================+
+       +=================+========================================+
+       | *Mapped scheme* | "dns"                                  |
+       +-----------------+----------------------------------------+
+       | *RR type*       | SVCB (64)                              |
+       +-----------------+----------------------------------------+
+       | *Name prefix*   | "_dns" for port 53, else "_$PORT._dns" |
+       +-----------------+----------------------------------------+
+       | *Automatically  | "port", "no-default-alpn"              |
+       | Mandatory Keys* |                                        |
+       +-----------------+----------------------------------------+
+       | *SvcParam       | "alpn": ["dot"]                        |
+       | defaults*       |                                        |
+       +-----------------+----------------------------------------+
+       | *Special        | Inherits all HTTPS RR SvcParamKeys     |
+       | behaviors*      |                                        |
+       +-----------------+----------------------------------------+
+       |                 | Overrides the HTTPS RR for DoH         |
+       +-----------------+----------------------------------------+
+       |                 | Default port is per-transport          |
+       +-----------------+----------------------------------------+
+
+                                 Table 3
 
 Acknowledgments
 
